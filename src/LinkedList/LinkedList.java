@@ -1,8 +1,6 @@
 package LinkedList;
 
-import javax.xml.stream.FactoryConfigurationError;
 import java.util.NoSuchElementException;
-import java.util.concurrent.TransferQueue;
 
 public class LinkedList {
 
@@ -48,28 +46,26 @@ public class LinkedList {
         if(isEmpty())
             throw new NoSuchElementException();
 
-        if(first == last){
+        if(first == last)
             first = last = null;
-            return;
+        else {
+            Node second = first.next;
+            first.next = null;
+            first = second;
         }
-
-        Node second = first.next;
-        first.next = null;
-        first = second;
         listSize--;
     }
 
     public void removeLast(){
         if(isEmpty())
             throw new NoSuchElementException();
-        if(first == last){
+        if(first == last)
             first = last = null;
-            return;
+        else {
+            var current = getPrevious(last);
+            last = current;
+            last.next = null;
         }
-
-        var current = getPrevious(last);
-        last = current;
-        last.next = null;
         listSize--;
     }
 
@@ -91,6 +87,74 @@ public class LinkedList {
 
     public int size(){
         return this.listSize;
+    }
+
+    public int[] toArray(){
+        int[] array = new int[listSize];
+        var current = first;
+        var index = 0;
+        while (current != null){
+            array[index++] = current.value;
+            current = current.next;
+        }
+        return array;
+    }
+
+//    my implementation
+    public void reverse(){
+        if(isEmpty())
+            return;
+
+        var current = first.next;
+        last = first;
+        while (current != null){
+            var next = current.next;
+            current.next = first;
+            first = current;
+            current = next;
+        }
+        last.next = null;
+    }
+
+//    Mosh's implementation
+    public void reversed(){
+        if (isEmpty()) return;
+
+        var previous = first;
+        var current = first.next;
+        while (current != null){
+            var next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        last = first;
+        last.next = null;
+        first = previous;
+    }
+
+//    My Solution
+    public int getKthNodeFromTheEnd(int K){
+        if(isEmpty())
+            throw new IllegalStateException();
+        if(K < 1 || K > listSize)
+            throw new IllegalArgumentException();
+
+        int count = 0;
+        Node p1, p2;
+        p1 = p2 = first;
+        // place the last pointer at suitable node
+        while ((K-1) != count){
+            p2 = p2.next;
+            count++;
+        }
+        // now move both the pointers forward until the p2 reaches last node
+        while (p2 != last){
+            p2 = p2.next;
+            p1 = p1.next;
+        }
+        return p1.value;
     }
 
     private boolean isEmpty(){
