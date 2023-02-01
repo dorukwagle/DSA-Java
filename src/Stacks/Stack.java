@@ -12,6 +12,8 @@ public class Stack {
     }
 
     public void push(int item){
+        if(counter == stack.length)
+            throw new StackOverflowError();
         stack[counter++] = item;
     }
 
