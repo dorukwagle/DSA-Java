@@ -17,6 +17,7 @@ public class App {
 //        tree.traverseInOrder();
 //        tree.traverseInOrderReverse();
 //        tree.traversePostOrder();
-        System.out.println(tree.height());
+//        System.out.println(tree.height());
+        System.out.println(tree.binarySearchMin());
     }
 }

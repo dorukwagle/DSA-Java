@@ -102,7 +102,7 @@ public class BinaryTree {
         if (root == null)
             return -1;
 
-        if (root.leftChild == null && root.rightChild == null)
+        if (isLeaf(root))
             return 0;
 
         return 1 + Math.max(height(root.leftChild), height(root.rightChild));
@@ -110,6 +110,40 @@ public class BinaryTree {
 
     public int height(){
         return height(firstNode);
+    }
+
+    public int min(Node root) {
+        if (root == null)
+            return Integer.MAX_VALUE;
+        if (isLeaf(root))
+            return root.value;
+
+        int left = min(root.leftChild);
+        int right = min(root.rightChild);
+
+        return Math.min(root.getValue(), Math.min(left, right));
+    }
+
+    public int min(){
+        if(firstNode == null)
+            throw new IllegalStateException();
+        return min(firstNode);
+    }
+
+    public int binarySearchMin(){
+        if(firstNode == null)
+            throw new IllegalStateException();
+        var cur = firstNode;
+        var last = cur;
+        while (cur != null){
+            last = cur;
+            cur = cur.leftChild;
+        }
+        return last.value;
+    }
+
+    private boolean isLeaf(Node node){
+        return node.leftChild == null && node.rightChild == null;
     }
 
     public void traversePreOrder(){
