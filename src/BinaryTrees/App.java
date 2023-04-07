@@ -12,12 +12,23 @@ public class App {
         tree.insert(12);
         tree.insert(18);
         tree.insert(17);
-        System.out.println(tree.find(17));
+
+        BinaryTree tree2 = new BinaryTree();
+        tree2.insert(10);
+        tree2.insert(5);
+        tree2.insert(15);
+        tree2.insert(6);
+        tree2.insert(1);
+        tree2.insert(8);
+        tree2.insert(12);
+        tree2.insert(18);
+        tree2.insert(17);
 //        tree.traversePreOrder();
 //        tree.traverseInOrder();
 //        tree.traverseInOrderReverse();
 //        tree.traversePostOrder();
 //        System.out.println(tree.height());
-        System.out.println(tree.binarySearchMin());
+//        System.out.println(tree.binarySearchMin());
+        System.out.println(tree.equals(tree2));
     }
 }

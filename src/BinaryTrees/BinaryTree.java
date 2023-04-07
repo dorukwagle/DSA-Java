@@ -142,6 +142,21 @@ public class BinaryTree {
         return last.value;
     }
 
+    private boolean equals(Node n1, Node n2){
+        if(n1 == null && n2 == null)
+            return true;
+        if(n1 == null || n2 == null)
+            return false;
+
+        var left = equals(n1.leftChild, n2.leftChild);
+        var right = equals(n1.rightChild, n2.rightChild);
+        return left && right && n1.value == n2.value;
+    }
+
+    public boolean equals(BinaryTree tree){
+        return equals(firstNode, tree.firstNode);
+    }
+
     private boolean isLeaf(Node node){
         return node.leftChild == null && node.rightChild == null;
     }
