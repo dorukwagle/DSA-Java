@@ -13,5 +13,9 @@ public class App {
         tree.insert(18);
         tree.insert(17);
         System.out.println(tree.find(17));
+//        tree.traversePreOrder();
+//        tree.traverseInOrder();
+        tree.traverseInOrderReverse();
+//        tree.traversePostOrder();
     }
 }

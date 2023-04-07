@@ -14,22 +14,6 @@ public class BinaryTree {
             return value;
         }
 
-        public Node getLeftChild() {
-            return leftChild;
-        }
-
-        public Node getRightChild() {
-            return rightChild;
-        }
-
-        public void setLeftChild(Node leftChild) {
-            this.leftChild = leftChild;
-        }
-
-        public void setRightChild(Node rightChild) {
-            this.rightChild = rightChild;
-        }
-
         @Override
         public String toString(){
             return String.valueOf(value);
@@ -46,36 +30,90 @@ public class BinaryTree {
         }
         var cur = firstNode;
         while(true){
-            var left = cur.getLeftChild();
-            var right = cur.getRightChild();
+            var left = cur.leftChild;
+            var right = cur.rightChild;
             if(cur.getValue() < value){
                 if(right == null) {
-                    cur.setRightChild(node);
+                    cur.rightChild = node;
                     break;
                 }
                 else cur = right;
             }
             else {
                 if(left == null) {
-                    cur.setLeftChild(node);
+                    cur.leftChild = node;
                     break;
                 }
                 else cur = left;
             }
         }
     }
+
     public boolean find(int value){
         Node cur = firstNode;
 
         while (cur != null){
             if(cur.getValue() == value)
                 return true;
-            if(cur.getRightChild() != null && cur.getRightChild().getValue() <= value)
-                cur = cur.getRightChild();
-            else cur = cur.getLeftChild();
+            if(cur.rightChild != null && cur.rightChild.getValue() <= value)
+                cur = cur.rightChild;
+            else cur = cur.leftChild;
         }
         return false;
     }
+
+    private void traversePreOrder(Node root){
+        if (root == null)
+            return;
+        // root, left, right
+        System.out.println(root.getValue());
+        traversePreOrder(root.leftChild);
+        traversePreOrder(root.rightChild);
+    }
+
+    private void traverseInOrder(Node root){
+        if (root == null)
+            return;
+        // left, root, right
+        traverseInOrder(root.leftChild);
+        System.out.println(root.getValue());
+        traverseInOrder(root.rightChild);
+    }
+
+    private void traverseInOrderReverse(Node root){
+        if (root == null)
+            return;
+        // right, root, left
+        traverseInOrder(root.rightChild);
+        System.out.println(root.getValue());
+        traverseInOrder(root.leftChild);
+    }
+
+    private void traversePostOrder(Node root){
+        if (root == null)
+            return;
+        // left, right, root
+        traversePostOrder(root.leftChild);
+        traversePostOrder(root.rightChild);
+        System.out.println(root.getValue());
+    }
+
+    public void traversePreOrder(){
+        traversePreOrder(firstNode);
+    }
+
+    public void traverseInOrder(){
+        traverseInOrder(firstNode);
+    }
+
+    public void traverseInOrderReverse(){
+        traverseInOrderReverse(firstNode);
+    }
+
+    public void traversePostOrder(){
+        traversePostOrder(firstNode);
+    }
+
 }
 
 
