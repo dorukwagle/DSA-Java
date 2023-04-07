@@ -98,6 +98,20 @@ public class BinaryTree {
         System.out.println(root.getValue());
     }
 
+    private int height(Node root){
+        if (root == null)
+            return -1;
+
+        if (root.leftChild == null && root.rightChild == null)
+            return 0;
+
+        return 1 + Math.max(height(root.leftChild), height(root.rightChild));
+    }
+
+    public int height(){
+        return height(firstNode);
+    }
+
     public void traversePreOrder(){
         traversePreOrder(firstNode);
     }
