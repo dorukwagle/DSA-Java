@@ -110,6 +110,20 @@ public class BinaryTree {
         return 1 + Math.max(height(root.leftChild), height(root.rightChild));
     }
 
+    private int countLeaves(Node node){
+        if(node == null)
+            return 0;
+        if(node.leftChild == null && node.rightChild == null)
+            return 1;
+        return countLeaves(node.leftChild) + countLeaves(node.rightChild);
+    }
+
+    public int countLeaves(){
+        if(firstNode == null)
+            return 0;
+        return countLeaves(firstNode);
+    }
+
     public int height(){
         return height(firstNode);
     }
@@ -195,6 +209,8 @@ public class BinaryTree {
             throw new InvalidStackFrameException();
         nodeAtKDistance(firstNode, distance);
     }
+
+
 
     public boolean isBinarySearchTree(){
         return isBinarySearchTree(firstNode, Integer.MIN_VALUE, Integer.MAX_VALUE);

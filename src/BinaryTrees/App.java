@@ -32,6 +32,7 @@ public class App {
         System.out.println(tree.equals(tree2));
         System.out.println(tree.isBinarySearchTree());
 //        tree.nodeAtKDistance(2);
-        tree.levelOrderTraverse();
+//        tree.levelOrderTraverse();
+        System.out.println(tree.countLeaves());
     }
 }
