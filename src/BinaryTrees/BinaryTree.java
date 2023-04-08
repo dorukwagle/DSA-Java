@@ -183,6 +183,13 @@ public class BinaryTree {
         nodeAtKDistance(node.rightChild, distance - 1);
     }
 
+    public void levelOrderTraverse(){
+        if(firstNode == null)
+            return;
+        for (int i = 0; i <= height(firstNode); ++i)
+            nodeAtKDistance(i);
+    }
+
     public void nodeAtKDistance(int distance){
         if(firstNode == null)
             throw new InvalidStackFrameException();
