@@ -4,7 +4,7 @@ public class AVLTree {
     private class AVLNode {
         private AVLNode leftChild;
         private AVLNode rightChild;
-        int value;
+        private int value;
 
         public AVLNode(int value) {
             this.value = value;
@@ -18,32 +18,20 @@ public class AVLTree {
 
     private AVLNode root;
 
-    private void insert(AVLNode node, int value) {
-        var valueNode = new AVLNode(value);
+    private AVLNode insert(AVLNode node, int value) {
         if(node == null)
-            return;
-
-        if(node.leftChild == null && value < node.value){
-            node.leftChild = valueNode;
-            return;
-        }
-
-        if(node.rightChild == null && value >= node.value){
-            node.rightChild = valueNode;
-            return;
-        }
+            return new AVLNode(value);
 
         if(value < node.value)
-            insert(node.leftChild, value);
-        else insert(node.rightChild, value);
+            node.leftChild = insert(node.leftChild, value);
+        else
+            node.rightChild = insert(node.rightChild, value);
+
+       return node;
     }
 
     public void insert(int value){
-        if(root == null){
-            root = new AVLNode(value);
-            return;
-        }
-        insert(root, value);
+        root = insert(root, value);
     }
 
 }
