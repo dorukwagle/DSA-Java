@@ -1,5 +1,7 @@
 package BinaryTrees;
 
+import com.sun.jdi.InvalidStackFrameException;
+
 public class BinaryTree {
     private class Node {
         private int value;
@@ -154,7 +156,41 @@ public class BinaryTree {
     }
 
     public boolean equals(BinaryTree tree){
+        if(tree == null)
+            return false;
         return equals(firstNode, tree.firstNode);
+    }
+
+    private boolean isBinarySearchTree(Node node, int min, int max){
+        if (node == null)
+            return true;
+
+        if(node.value < min || node.value > max)
+            return true;
+
+        return isBinarySearchTree(node.leftChild, min, node.value - 1) &&
+                isBinarySearchTree(node.rightChild, node.value + 1, max);
+    }
+
+    private void nodeAtKDistance(Node node, int distance){
+        if(node == null)
+            return;
+        if(distance == 0) {
+            System.out.println(node.value);
+            return;
+        }
+        nodeAtKDistance(node.leftChild, distance - 1);
+        nodeAtKDistance(node.rightChild, distance - 1);
+    }
+
+    public void nodeAtKDistance(int distance){
+        if(firstNode == null)
+            throw new InvalidStackFrameException();
+        nodeAtKDistance(firstNode, distance);
+    }
+
+    public boolean isBinarySearchTree(){
+        return isBinarySearchTree(firstNode, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
     private boolean isLeaf(Node node){
