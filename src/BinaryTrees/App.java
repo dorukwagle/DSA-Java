@@ -33,6 +33,7 @@ public class App {
         System.out.println(tree.isBinarySearchTree());
 //        tree.nodeAtKDistance(2);
 //        tree.levelOrderTraverse();
-        System.out.println(tree.countLeaves());
+//        System.out.println(tree.countLeaves());
+        tree.listAncestors(6);
     }
 }

@@ -2,6 +2,9 @@ package BinaryTrees;
 
 import com.sun.jdi.InvalidStackFrameException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinaryTree {
     private class Node {
         private int value;
@@ -158,6 +161,8 @@ public class BinaryTree {
         return last.value;
     }
 
+
+
     private boolean equals(Node n1, Node n2){
         if(n1 == null && n2 == null)
             return true;
@@ -210,7 +215,25 @@ public class BinaryTree {
         nodeAtKDistance(firstNode, distance);
     }
 
+    private boolean getAncestors(Node parent, int value, List<Integer> list){
+        if(parent == null)
+            return false;
 
+        if(parent.value == value)
+            return true;
+
+        if(getAncestors(parent.leftChild, value, list) || getAncestors(parent.rightChild, value, list)) {
+            list.add(parent.value);
+            return true;
+        }
+        return false;
+    }
+
+    public void listAncestors(int value){
+        List<Integer> lst = new ArrayList<>();
+        var found = getAncestors(firstNode, value, lst);
+        System.out.println(lst);
+    }
 
     public boolean isBinarySearchTree(){
         return isBinarySearchTree(firstNode, Integer.MIN_VALUE, Integer.MAX_VALUE);
