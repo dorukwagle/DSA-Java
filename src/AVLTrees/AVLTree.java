@@ -31,30 +31,58 @@ public class AVLTree {
             node.rightChild = insert(node.rightChild, value);
 
         // calculate the node height
-        node.height = 1 + Math.max(height(node.leftChild), height(node.rightChild));
+        setHeight(node);
 
-        // check for balance factor
-        balance(node);
-       return node;
+        // balance if needed
+        return balance(node);
     }
 
     private int height(AVLNode node) {
         return (node == null) ? -1: node.height;
     }
 
-    private void balance(AVLNode node) {
-        if(isLeftHeavy(node)) {
-            // node is left heavy, right rotation required
-            if(balanceFactor(node.leftChild) < 0)
-                System.out.println(node.value + " requires left right");
-            else System.out.println(node.value + " requires right rotation");
+    private void setHeight(AVLNode node){
+        node.height = 1 + Math.max(height(node.leftChild), height(node.rightChild));
+    }
+
+    private AVLNode balance(AVLNode node) {
+        AVLNode root = node;
+
+        if(isLeftHeavy(root)) {
+            if(balanceFactor(root.leftChild) < 0)
+                root.leftChild = rotateLeft(root.leftChild);
+            return rotateRight(root);
         }
-        if(isRightHeavy(node)){
+        if(isRightHeavy(root)){
             if(balanceFactor(node.rightChild) > 0)
-                System.out.println(node.value + " requires right left rotation");
-                // node is right heavy, left rotation required
-            else System.out.println(node.value + " requires left rotation");
+                root.rightChild = rotateRight(root.rightChild);
+            return rotateLeft(root);
         }
+        return root;
+    }
+
+    private AVLNode rotateLeft(AVLNode root) {
+        var newRoot = root.rightChild;
+
+        root.rightChild = newRoot.leftChild;
+        newRoot.leftChild = root;
+
+        setHeight(root);
+        setHeight(newRoot);
+
+        return newRoot;
+    }
+
+    private AVLNode rotateRight(AVLNode root) {
+        var newRoot = root.leftChild;
+
+        newRoot.leftChild = root.rightChild;
+        newRoot.rightChild = root;
+
+        setHeight(root);
+        setHeight(newRoot);
+
+        return newRoot;
     }
 
     private boolean isLeftHeavy(AVLNode node) {
