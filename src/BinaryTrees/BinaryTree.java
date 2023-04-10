@@ -185,7 +185,7 @@ public class BinaryTree {
             return true;
 
         if(node.value < min || node.value > max)
-            return true;
+            return false;
 
         return isBinarySearchTree(node.leftChild, min, node.value - 1) &&
                 isBinarySearchTree(node.rightChild, node.value + 1, max);
