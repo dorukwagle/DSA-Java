@@ -45,6 +45,9 @@ public class App {
     }
 
     private static int kthLargestItem(int[] arr, int k) {
+        if (k < 0 || k >= arr.length)
+            throw new IllegalArgumentException();
+
         Heap hp = new Heap();
         Arrays.stream(arr).forEach(hp::insert);
         while(k != 1) {
