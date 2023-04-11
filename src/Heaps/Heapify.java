@@ -10,6 +10,13 @@ public class Heapify {
             heapify(i);
     }
 
+    public static void heapOptimized(int[] array) {
+        Heapify.array = array;
+        int lastParentIndex = array.length / 2 - 1;
+        for (int i = lastParentIndex; i >= 0; --i)
+            heapify(i);
+    }
+
     private static void heapify(int index) {
         int largeIndex = index;
         int leftIndex = index * 2 + 1;
@@ -28,6 +35,7 @@ public class Heapify {
 
         heapify(largeIndex);
     }
+
 
     private static void swap(int first, int second) {
         int tmp = array[first];

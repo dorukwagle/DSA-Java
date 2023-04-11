@@ -11,9 +11,9 @@ public class App {
         Heap heap = new Heap();
         int[] arr = {3, 5, 8, 9, 23, 44, 21, 15, 88, 34};
         int[] ar = {5, 3, 8, 4, 1, 2};
-        for (int i : arr)
+        for (int i : ar)
             heap.insert(i);
-        Heapify.heap(arr);
+        Heapify.heapOptimized(ar);
         System.out.println("done");
     }
 
