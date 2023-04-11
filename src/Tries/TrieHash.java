@@ -13,6 +13,18 @@ public class TrieHash {
             this.value = value;
         }
 
+        public boolean hasChild(char c) {
+            return children.containsKey(c);
+        }
+
+        public void addChild(char c) {
+            children.put(c, new Node(c));
+        }
+
+        public Node getChild(char c) {
+            return children.get(c);
+        }
+
         @Override
         public String toString() {
             return String.valueOf(value);
@@ -24,9 +36,9 @@ public class TrieHash {
     public void insert(String word) {
         Node cur = root;
         for (char c : word.toCharArray()) {
-            if(cur.children.get(c) == null)
-                cur.children.put(c, new Node(c));
-            cur = cur.children.get(c);
+            if(!cur.hasChild(c))
+                cur.addChild(c);
+            cur = cur.getChild(c);
         }
         cur.isEndOfWord = true;
     }
