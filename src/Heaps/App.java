@@ -1,10 +1,15 @@
 package Heaps;
 
+import java.util.Arrays;
+
 public class App {
     public static void main(String[] args) {
 //        heapTest();
-        heapifyTest();
+//        heapifyTest();
 //        heapSort();
+        int[] arr = {3, 5, 8, 9, 23, 44, 21, 15, 88, 34};
+        int largest = kthLargestItem(arr, 3);
+        System.out.println(largest);
     }
 
     private static void heapifyTest() {
@@ -37,6 +42,16 @@ public class App {
             heap.insert(i);
         while(!heap.isEmpty())
             System.out.println(heap.remove());
+    }
+
+    private static int kthLargestItem(int[] arr, int k) {
+        Heap hp = new Heap();
+        Arrays.stream(arr).forEach(hp::insert);
+        while(k != 1) {
+            hp.remove();
+            k--;
+        }
+        return hp.remove();
     }
 }
 
