@@ -3,7 +3,18 @@ package Heaps;
 public class App {
     public static void main(String[] args) {
 //        heapTest();
-        heapSort();
+        heapifyTest();
+//        heapSort();
+    }
+
+    private static void heapifyTest() {
+        Heap heap = new Heap();
+        int[] arr = {3, 5, 8, 9, 23, 44, 21, 15, 88, 34};
+        int[] ar = {5, 3, 8, 4, 1, 2};
+        for (int i : arr)
+            heap.insert(i);
+        Heapify.heap(arr);
+        System.out.println("done");
     }
 
     private static void heapTest() {
