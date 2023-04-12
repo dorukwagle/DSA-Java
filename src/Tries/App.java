@@ -6,7 +6,8 @@ public class App {
         trie.insert("cat");
         trie.insert("can");
         trie.insert("catro");
-        System.out.println(trie.contains(null));
+//        System.out.println(trie.contains(null));
+        trie.traversePostOrder();
         System.out.println("done");
     }
 

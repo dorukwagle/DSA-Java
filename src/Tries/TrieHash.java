@@ -25,6 +25,10 @@ public class TrieHash {
             return children.get(c);
         }
 
+        public Node[] getChildren() {
+            return children.values().toArray(Node[]::new);
+        }
+
         @Override
         public String toString() {
             return String.valueOf(value);
@@ -53,5 +57,25 @@ public class TrieHash {
             cur = cur.getChild(c);
         }
         return cur.isEndOfWord;
+    }
+
+    private void traversePreOrder(Node root) {
+        System.out.println(root.value);
+        for (var child : root.getChildren())
+            traversePreOrder(child);
+    }
+
+    private void traversePostOrder(Node root) {
+        for (var child : root.getChildren())
+            traversePostOrder(child);
+        System.out.println(root.value);
+    }
+
+    public void traversePreOrder() {
+        traversePreOrder(root);
+    }
+
+    public void traversePostOrder() {
+        traversePostOrder(root);
     }
 }
