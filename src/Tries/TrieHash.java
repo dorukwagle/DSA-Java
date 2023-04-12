@@ -42,4 +42,16 @@ public class TrieHash {
         }
         cur.isEndOfWord = true;
     }
+
+    public boolean contains(String word) {
+        if (word == null)
+            return false;
+        Node cur = root;
+        for (char c : word.toCharArray()) {
+            if (!cur.hasChild(c))
+                return false;
+            cur = cur.getChild(c);
+        }
+        return cur.isEndOfWord;
+    }
 }

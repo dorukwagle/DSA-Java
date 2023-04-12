@@ -2,10 +2,11 @@ package Tries;
 
 public class App {
     public static void main(String[] args) {
-        Trie trie = new Trie();
+        TrieHash trie = new TrieHash();
         trie.insert("cat");
         trie.insert("can");
         trie.insert("catro");
+        System.out.println(trie.contains(null));
         System.out.println("done");
     }
 
