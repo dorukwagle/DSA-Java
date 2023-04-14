@@ -3,15 +3,21 @@ package Tries;
 public class App {
     public static void main(String[] args) {
         TrieHash trie = new TrieHash();
-        trie.insert("cat");
-        trie.insert("can");
-        trie.insert("cannot");
-        trie.insert("catro");
+        trie.insert("caat");
+        trie.insert("caan");
+        trie.insert("caannot");
+        trie.insert("caatro");
+        trie.insert("canibal");
+        trie.insert("patrol");
+        trie.insert("patrollium");
+        trie.insert("patting");
+        trie.insert("patnot");
+        trie.insert("patnice");
+        trie.insert("patrolling");
 //        System.out.println(trie.contains(null));
 //        trie.traversePostOrder();
         trie.remove(null);
-        System.out.println(trie.contains("cannot"));
-        System.out.println(trie.contains("can"));
+        System.out.println(trie.getWords(""));
         System.out.println("done");
     }
 

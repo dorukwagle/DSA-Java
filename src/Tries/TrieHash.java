@@ -1,7 +1,9 @@
 package Tries;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class TrieHash {
     private class Node {
@@ -80,6 +82,8 @@ public class TrieHash {
         System.out.println(root.value);
     }
 
+
+
     private void remove(Node root, String word, int index) {
         if (index == word.length()) {
             root.isEndOfWord = false;
@@ -98,10 +102,42 @@ public class TrieHash {
             root.removeChild(c);
     }
 
+    private void findWords(Node node, String prefix, List<String> list) {
+        if (node == null)
+            return;
+
+        if (node.isEndOfWord)
+            list.add(prefix);
+
+        for (Node child : node.getChildren())
+            findWords(child, prefix + child.value, list);
+    }
+
+    private Node findLastNode(String prefix) {
+        var current = root;
+        for (char c : prefix.toCharArray()) {
+            if(!current.hasChild(c))
+                return null;
+            current = current.getChild(c);
+        }
+        return current;
+    }
+
     public void remove(String word) {
         if (word == null)
             return;
         remove(root, word, 0);
+    }
+
+    public List<String> getWords(String prefix) {
+        List<String> list = new ArrayList<>();
+
+        if (prefix == null)
+            return list;
+
+        var lastNode = findLastNode(prefix);
+        findWords(lastNode, prefix, list);
+        return list;
     }
 
     public void traversePreOrder() {
