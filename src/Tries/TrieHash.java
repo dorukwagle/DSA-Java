@@ -1,5 +1,6 @@
 package Tries;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 public class TrieHash {
@@ -21,12 +22,20 @@ public class TrieHash {
             children.put(c, new Node(c));
         }
 
+        public boolean isEmpty() {
+            return children.values().toArray(Node[]::new).length == 0;
+        }
+
         public Node getChild(char c) {
             return children.get(c);
         }
 
         public Node[] getChildren() {
             return children.values().toArray(Node[]::new);
+        }
+
+        public void removeChild(char c) {
+            children.remove(c);
         }
 
         @Override
@@ -69,6 +78,30 @@ public class TrieHash {
         for (var child : root.getChildren())
             traversePostOrder(child);
         System.out.println(root.value);
+    }
+
+    private void remove(Node root, String word, int index) {
+        if (index == word.length()) {
+            root.isEndOfWord = false;
+            return;
+        }
+
+        char c = word.charAt(index);
+        Node child = root.getChild(c);
+
+        if (child == null)
+            return;
+
+        remove(child, word, index + 1);
+
+        if (child.isEmpty() && !child.isEndOfWord)
+            root.removeChild(c);
+    }
+
+    public void remove(String word) {
+        if (word == null)
+            return;
+        remove(root, word, 0);
     }
 
     public void traversePreOrder() {
