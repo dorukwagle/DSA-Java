@@ -13,7 +13,7 @@ public class App {
         // 9 8 2 5 7 1 3 14 22 34
         Arrays.sort(arr);
         System.out.println(Arrays.toString(arr));
-        var found = BinarySearch.search(arr, 35);
+        var found = JumpSearch.search(arr, 34);
         System.out.println(found);
     }
 }
