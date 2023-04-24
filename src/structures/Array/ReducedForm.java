@@ -27,7 +27,7 @@ public class ReducedForm {
         //Code here
         Arrays.stream(arr).map(item -> {
             int position = 0;
-            for (int i=0; i<n; i++){
+            for (int i = 0; i < n; i++){
                 if(item > arr[i])
                     ++position;
             }
