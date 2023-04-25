@@ -210,4 +210,65 @@ public class StringUtils {
 
         return String.join(" ", words);
     }
+
+//    public static boolean areAnagram(String str1, String str2) {
+//        if (str1 == null || str2 == null || str1.length() != str2.length() || str1.isEmpty() || str2.isEmpty())
+//            return false;
+//
+//        for (var ch : str1.split(""))
+//            if (!str2.contains(ch))
+//                return false;
+//
+//        return true;
+//    }
+
+    // find anagrams using sorting method
+    public static boolean areAnagrams(String str1, String str2) {
+        if (str1 == null || str2 == null || str1.length() != str2.length())
+            return false;
+
+        char[] first = str1.toLowerCase().toCharArray();
+        char[] second = str2.toLowerCase().toCharArray();
+
+        Arrays.sort(first);
+        Arrays.sort(second);
+
+        return Arrays.equals(first, second);
+    }
+
+    // find anagrams using histogram method
+    public static boolean areAnagramsH(String first, String second) {
+        final int ALPHABETS = 26;
+
+        if (first == null || second == null || first.length() != second.length())
+            return false;
+
+        int[] frequency = new int[ALPHABETS];
+        first = first.toLowerCase();
+        second = second.toLowerCase();
+
+        for (int i = 0; i < first.length(); ++i)
+            frequency[first.charAt(i) - 'a']++;
+
+        for (int i = 0; i < second.length(); ++i) {
+            var index = second.charAt(i) - 'a';
+            if (frequency[index] == 0)
+                return false;
+            frequency[index]--;
+        }
+        return true;
+    }
+
+    public static boolean isPalindrome(String string) {
+        if (string == null || string.isEmpty())
+            return false;
+
+        for (
+                int i = 0, j = string.length() - 1;
+                i < j; ++i, --j
+        )
+            if (string.charAt(i) != string.charAt(j))
+                return false;
+        return true;
+    }
 }
